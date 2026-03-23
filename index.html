@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Clicker Game</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .button { padding: 10px 20px; font-size: 20px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Money Clicker Game</h1>
+    <div id="money">Money: $0</div>
+    <button class="button" id="clickButton">Click me!</button>
+    <div id="prestigeContainer" style="display:none;">
+        <h2>Rebirth</h2>
+        <button class="button" id="prestigeButton">Prestige for Bonus!</button>
+        <div id="bonusText"></div>
+    </div>
+    <script>
+        let money = 0;
+        let prestigePoints = 0;
+        let bonus = 1;
+
+        document.getElementById('clickButton').addEventListener('click', () => {
+            money += bonus;
+            document.getElementById('money').innerText = 'Money: $' + money;
+            checkPrestige(); // Check if prestige is available
+        });
+
+        function checkPrestige() {
+            if (money >= 100) { // For example, allows for prestige at 100 Money
+                document.getElementById('prestigeContainer').style.display = 'block';
+            }
+        }
+
+        document.getElementById('prestigeButton').addEventListener('click', () => {
+            prestigePoints++;
+            money = 0; // Reset money
+            bonus += 1; // Increase bonus for each prestige
+            document.getElementById('money').innerText = 'Money: $' + money;
+            document.getElementById('bonusText').innerText = 'You have ' + prestigePoints + ' prestige points. Bonus is now x' + bonus + '.';
+        });
+    </script>
+</body>
+</html>
